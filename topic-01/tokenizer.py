@@ -1,13 +1,13 @@
 import re
 
 patterns = [
-  [r"\d*\.\d+|\d+\.\d*|\d+","number"], #Number
-  [r"\+","+"],                         #Plus sign
-  [r".","error"]                       #Unexpected error
+    [r"\d*\.\d+|\d+\.\d*|\d+","number"], #Number
+    [r"\+","+"],                         #Plus sign
+    [r".","error"]                       #Unexpected error
 ]
 
 for pattern in patterns:
-  pattern[0] = re.compile(pattern[0])
+    pattern[0] = re.compile(pattern[0])
 
 def tokenize(characters):
     tokens = []
