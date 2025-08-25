@@ -33,7 +33,7 @@ def tokenize(characters):
         tokens.append(token)
         position = match.end()
     
-    tokens.append({"tag":None,"position":position)}
+    tokens.append({"tag":None,"position":position})
     return tokens
 
 def test_simple_tokens():
@@ -47,12 +47,17 @@ def test_simple_tokens():
         {"tag":None, "position":1}
     ]
 
+def test_simple_expressions():
+    print("Test simple expressions...")
+    t = tokenize("2+3")
+    assert t == [{'tag': 'number', 'position': 0, 'value': 2}, {'tag': '+', 'position': 1}, {'tag': 'number', 'position': 2, 'value': 3}, {'tag': None, 'position': 3}]
+
 #will need:
-#Parser
 #Evaluator
 #Runner
 
 if (__name__ == "__main__"):
     print("Testing Tokenizer...")
     test_simple_tokens()
+    test_simple_expressions()
     print("Done.")
