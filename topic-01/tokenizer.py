@@ -47,6 +47,11 @@ def test_simple_tokens():
         {"tag":None, "position":1}
     ]
 
+#will need:
+#Parser
+#Evaluator
+#Runner
+
 if (__name__ == "__main__"):
     print("Testing Tokenizer...")
     test_simple_tokens()
