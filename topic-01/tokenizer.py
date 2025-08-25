@@ -38,6 +38,7 @@ def tokenize(characters):
 
 def test_simple_tokens():
     print("Test simple tokens...")
+    t = tokenize("+")
     assert tokenize("+") == [
         {"tag":"+", "position":0},
         {"tag":None, "position":1}
