@@ -21,12 +21,34 @@ def parse_factor(tokens):
         ast, tokens = parse_expression(tokens[1:])
         assert tokens[0]["tag"] == ")"
         return ast, tokens[1:]
-    raise Exception(f"Unexpected token '{token['tag']}' ")
+    raise Exception(f"Unexpected token '{token['tag']}' at position {token['position']}.")
 
 def test_parse_factor():
     """
     factor = <number> | "(" expression ")"
     """
+
+def parse_term(tokens):
+    """
+    factor = <number> | "(" expression ")"
+    """
+    node, tokens = parse_factor(tokens)
+    while tokens[0]["tag"] in ["*","/"]:
+        tag = tokens[0]["tag"]
+        right_node, tokens = parse_factor(tokens[1:])
+        node = {"tag":tag, "left":node, "right":right_node}
+    
+    return node, tokens
+
+def test_parse_term():
+    """
+    factor = <number> | "(" expression ")"
+    """
+    print("Testing parse term...")
+
+    tokens = tokenize("2*4/6")
+    ast, tokens = parse_term(tokens)
+    assert ast == {'tag': '/', 'left': {'tag': }}
 
 def parse_expression(tokens):
     return parse_factor(tokens)
