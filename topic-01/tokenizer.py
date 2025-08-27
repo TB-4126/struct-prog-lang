@@ -1,9 +1,17 @@
 import re
 
 patterns = [
-    [r"\d*\.\d+|\d+\.\d*|\d+","number"], #Number
-    [r"\+","+"],                         #Plus sign
-    [r".","error"]                       #Unexpected error
+    [r"print","print"],                       #Keyword print
+    [r"\d*\.\d+|\d+\.\d*|\d+","number"],      #Number
+    [r"[a-zA-Z_][a-zA-Z0-9_]*","identifier"], #Identifier
+    [r"\+","+"],                              #Plus sign
+    [r"\-","-"],                              #Minus sign
+    [r"\*","*"],                              #Multiplication sign
+    [r"\/","/"],                              #Division sign
+    [r"\(","("],
+    [r"\)",")"],
+    [r"\s+","whitespace"],                    #Defines whitespace
+    [r".","error"]                            #Unexpected error
 ]
 
 for pattern in patterns:
@@ -30,7 +38,10 @@ def tokenize(characters):
             token["value"] = float(value)
           else:
             token["value"] = int(value)
-        tokens.append(token)
+        if (token["tag"] == "identifier"):
+            token["value"] = value
+        if (token["tag"] != "whitespace"):
+            tokens.append(token)
         position = match.end()
     
     tokens.append({"tag":None,"position":position})
@@ -38,15 +49,24 @@ def tokenize(characters):
 
 def test_simple_tokens():
     print("Test simple tokens...")
-    t = tokenize("+")
-    assert tokenize("+") == [
-        {"tag":"+", "position":0},
-        {"tag":None, "position":1}
-    ]
+    for c in "+-*/()":
+        assert tokenize(c) == [
+            {"tag":c, "position":0},
+            {"tag":None, "position":1}
+        ]
     assert tokenize("3") == [
         {"tag":"number", "position":0, "value":3},
         {"tag":None, "position":1}
     ]
+    assert tokenize("cat") == [
+        {"tag":"identifier", "position":0, "value":"cat"},
+        {"tag":None, "position":3}
+    ]
+
+def test_whitespace():
+    print("Test whitespace")
+    tokens = tokenize("2 + 3")
+    assert tokens == [{'tag': 'number', 'position': 0, 'value': 2}, {'tag': '+', 'position': 2}, {'tag': 'number', 'position': 4, 'value': 3}, {'tag': None, 'position': 5}]
 
 def test_simple_expressions():
     print("Test simple expressions...")
@@ -60,5 +80,6 @@ def test_simple_expressions():
 if (__name__ == "__main__"):
     print("Testing Tokenizer...")
     test_simple_tokens()
+    test_whitespace()
     test_simple_expressions()
     print("Done.")
