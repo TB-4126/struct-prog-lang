@@ -73,10 +73,6 @@ def test_simple_expressions():
     t = tokenize("2+3")
     assert t == [{'tag': 'number', 'position': 0, 'value': 2}, {'tag': '+', 'position': 1}, {'tag': 'number', 'position': 2, 'value': 3}, {'tag': None, 'position': 3}]
 
-#will need:
-#Evaluator
-#Runner
-
 if (__name__ == "__main__"):
     print("Testing Tokenizer...")
     test_simple_tokens()
