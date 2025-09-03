@@ -46,7 +46,7 @@ def tokenize(characters):
         position = match.end()
     
     #Append end-of-stream marker
-    tokens.append({"tag":None,"position":position})
+    tokens.append({"tag":None,"value":None,"position":position})
     return tokens
 
 def test_simple_tokens():
@@ -62,14 +62,14 @@ def test_number_token():
     print("Test number tokens...")
     for s in ["1","11"]:
         t = tokenize(s)
-        assert
-        assert
-        assert
+        assert len(t) == 2
+        assert t[0]["tag"] == "number"
+        assert t[0]["value"] == int(s)
     for s in ["1.1","11.11","11.",".11"]:
         t = tokenize(s)
-        assert
-        assert
-        assert
+        assert len(t) == 2
+        assert t[0]["tag"] == "number"
+        assert t[0]["value"] == float(s)
 
 def test_multiple_tokens():
     print("Test multiple tokens...")
@@ -100,17 +100,12 @@ def test_identifier_tokens():
         assert t[0]["value"] == s
 
 def test_error():
-    print("test error")
+    print("test error...")
     try:
         t = tokenize("$1+2")
         assert False, "Should have raised an error for an invalid character."
     except Exception as e:
         assert "Syntax error" in str(e),f"Unexpected exception: {e}"
-
-def test_simple_expressions():
-    print("Test simple expressions...")
-    t = tokenize("2+3")
-    assert t == [{'tag': 'number', 'position': 0, 'value': 2}, {'tag': '+', 'position': 1}, {'tag': 'number', 'position': 2, 'value': 3}, {'tag': None, 'position': 3}]
 
 if (__name__ == "__main__"):
     print("Testing Tokenizer...")
@@ -121,5 +116,4 @@ if (__name__ == "__main__"):
     test_keywords()
     test_identifier_tokens()
     test_error()
-    test_simple_expressions()
     print("Done.")

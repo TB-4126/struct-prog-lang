@@ -1,10 +1,34 @@
 from tokenizer import tokenize
 
 """
-factor = <number> | "(" expression ")"
-term = factor { "*"|"/" factor }
-expression = term { "+"|"-" term }
-statement = <print> expression | expression
+parser.py -- implement parser for simple expressions
+
+Accept a string of tokens, return an AST expressed as stack of dictionaries
+"""
+
+ebnf = """
+   factor = <number> | <identifier> | "(" expression ")"
+   term = factor { "*"|"/" factor }
+   expression = term { "+"|"-" term }
+   statement = <print> expression | expression
+   program = expression
+"""
+
+bnf = """
+   factor = <number>
+   factor = <identifier>
+   factor = "(" expression ")"
+   
+   term = factor
+   term = term * factor
+   term = term / factor
+   
+   expression = term
+   expression = expression + term
+   expression = expression - term 
+   
+   statement = <print> expression
+   statement = expression
 """
 
 def parse_factor(tokens):
@@ -27,7 +51,7 @@ def test_parse_factor():
     """
     factor = <number> | "(" expression ")"
     """
-    print("Testing parse_factor...")
+    print("testing parse_factor...")
     for s in ["1","22","333"]:
         tokens = tokenize(s)
         ast, tokens = parse_factor(tokens)
@@ -59,7 +83,7 @@ def test_parse_term():
     """
     term = factor { "*"|"/" factor }
     """
-    print("Testing parse_term...")
+    print("testing parse_term...")
     for s in ["1","22","333"]:
         tokens = tokenize(s)
         ast, tokens = parse_term(tokens)
@@ -88,7 +112,7 @@ def test_parse_expression():
     """
     expression = term { "+"|"-" term }
     """
-    print("testing parse_expression()")
+    print("testing parse_expression...")
     for s in ["1","22","333"]:
         tokens = tokenize(s)
         ast, tokens = parse_expression(tokens)
@@ -123,7 +147,7 @@ def test_parse_statement():
     """
     statement = <print> expression | expression
     """
-    print("testing parse_statement()")
+    print("testing parse_statement...")
     tokens = tokenize("1+(2+3)*4")
     ast, tokens = parse_statement(tokens)
     assert ast == {'tag': '+', 'left': {'tag': 'number', 'value': 1}, 'right': {'tag': '*', 'left': {'tag': '+', 'left': {'tag': 'number', 'value': 2}, 'right': {'tag': 'number', 'value': 3}}, 'right': {'tag': 'number', 'value': 4}}}
@@ -135,10 +159,21 @@ def parse(tokens): # --> AST
     ast, tokens = parse_statement(tokens)
     return ast
 
+def test_parse():
+    """
+    program = expression
+    """
+    print("testing parse...")
+    tokens = tokenize("1+(2+3)+4")
+    ast1, _ = parse_statement(tokens)
+    ast2 = parse(tokens)
+    assert ast1 == ast2, "parse() is not evaluating via parse_expression()"
+
 if (__name__ == "__main__"):
     print("Testing parser...")
     test_parse_factor()
     test_parse_term()
     test_parse_expression()
     test_parse_statement()
+    test_parse()
     print("Done.")
