@@ -11,7 +11,7 @@ def parse_factor(tokens):
     """
     factor = <number> | "(" expression ")"
     """
-    token = token[0]
+    token = tokens[0]
     if (token["tag"] == "number"):
         return {
             "tag":"number",
