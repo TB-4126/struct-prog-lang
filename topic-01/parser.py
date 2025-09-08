@@ -156,6 +156,9 @@ def test_parse_statement():
     assert ast == {'tag': 'print', 'value': {'tag': '*', 'left': {'tag': 'number', 'value': 2}, 'right': {'tag': 'number', 'value': 4}}}
 
 def parse(tokens): # --> AST
+    """
+    program = expression
+    """
     ast, tokens = parse_statement(tokens)
     return ast
 
