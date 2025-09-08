@@ -6,6 +6,11 @@ printed_string = None
 def evaluate(ast):
    global printed_string
    printed_string = None
+   if ast["tag"] == "program":
+      last_value = None
+      for statement in ast["statement"]:
+         last_value
+      return last_value
    if ast["tag"] == "print":
       value = evaluate(ast["value"])
       s = str(value)
