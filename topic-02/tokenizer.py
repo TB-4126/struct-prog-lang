@@ -1,17 +1,3 @@
-
-#Keyword print
-    [r"\d*\.\d+|\d+\.\d*|\d+","number"],      #Number
-    [r"[a-zA-Z_][a-zA-Z0-9_]*","identifier"], #Identifier
-    [r"\+","+"],                              #Plus sign
-    [r"\-","-"],                              #Minus sign
-    [r"\*","*"],                              #Multiplication sign
-    [r"\/","/"],                              #Division sign
-    [r"\(","("],                              #Left parenthesis
-    [r"\)",")"],                              #Right parenthesis
-    [r"\;",";"],                              #Semicolon
-    [r"\s+","whitespace"],                    #Defines whitespace
-    [r".","error"]                            #Unexpected error
-
 import re
 
 # Define patterns for tokens
@@ -20,14 +6,14 @@ patterns = [
     [r"\d*\.\d+|\d+\.\d*|\d+", "number"],       #Number
     [r"[a-zA-Z_][a-zA-Z0-9_]*", "identifier"],  #Identifiers
     [r"\+", "+"],                               #Plus sign
-    [r"\-", "-"],
-    [r"\*", "*"],
-    [r"\/", "/"],
-    [r"\(", "("],
-    [r"\)", ")"],
-    [r"\;", ";"],
-    [r"\s+","whitespace"],
-    [r".","error"]
+    [r"\-", "-"],                               #Minus sign
+    [r"\*", "*"],                               #Multiplication sign
+    [r"\/", "/"],                               #Division sign
+    [r"\(", "("],                               #Left parenthesis
+    [r"\)", ")"],                               #Right parenthesis
+    [r"\;", ";"],                               #Semicolon
+    [r"\s+","whitespace"],                      #Defines Whitespace
+    [r".","error"]                              #Unexpected error
 ]
 
 for pattern in patterns:

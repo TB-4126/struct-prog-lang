@@ -8,7 +8,7 @@ def run(text):
     ast = parser.parse(tokens)
     evaluator.evaluate(ast)
 
-if __name__ == "__main__":
+if (__name__ == "__main__"):
     if len(sys.argv) > 1:
         with open(sys.argv[1],"r") as f:
             source = f.read()
