@@ -50,7 +50,7 @@ def evaluate(ast, environment):
         if "$parent" in environment:
             return evaluate(ast,environment["$parent"])
         raise Exception(f"Error:Undefined variable [{name}]")
-        # return environment[name]
+        #return environment[name]
     if ast["tag"] in ["+","-","*","/"]:
         left_value = evaluate(ast["left"], environment)
         right_value = evaluate(ast["right"], environment)
@@ -83,15 +83,15 @@ def evaluate(ast, environment):
             return left_value or right_value
 
 def test_evaluate_number():
-    print("testing evaluate number")
+    print("testing evaluate number...")
     assert evaluate({"tag":"number","value":4}, {}) == 4
 
 def test_evaluate_identifier():
-    print("testing evaluate identifier")
+    print("testing evaluate identifier...")
     assert evaluate({"tag":"identifier","value":"x"}, {"x":1.0}) == 1.0
 
 def test_evaluate_addition():
-    print("testing evaluate addition")
+    print("testing evaluate addition...")
     ast = {
         "tag":"+",
         "left":{"tag":"number","value":1},
@@ -100,7 +100,7 @@ def test_evaluate_addition():
     assert evaluate(ast, {}) == 4
 
 def test_evaluate_subtraction():
-    print("testing evaluate subtraction")
+    print("testing evaluate subtraction...")
     ast = {
         "tag":"-",
         "left":{"tag":"number","value":3},
@@ -109,7 +109,7 @@ def test_evaluate_subtraction():
     assert evaluate(ast, {}) == 1
 
 def test_evaluate_multiplication():
-    print("testing evaluate multiplication")
+    print("testing evaluate multiplication...")
     ast = {
         "tag":"*",
         "left":{"tag":"number","value":3},
@@ -118,7 +118,7 @@ def test_evaluate_multiplication():
     assert evaluate(ast, {}) == 6
 
 def test_evaluate_division():
-    print("testing evaluate division")
+    print("testing evaluate division...")
     ast = {
         "tag":"/",
         "left":{"tag":"number","value":4},
@@ -133,14 +133,14 @@ def eval(s, environment={}):
     return result
 
 def test_evaluate_expression():
-    print("testing evaluate expression")
+    print("testing evaluate expression...")
     assert eval("1+2+3") == 6
     assert eval("1+2*3") == 7
     assert eval("(1+2)*3") == 9
     assert eval("(1.0+2.1)*3") == 9.3
 
 def test_relational_expressions():
-    print("testing relational expressions")
+    print("testing relational expressions...")
     assert eval("3==3") == True
     assert eval("3==4") == False
     assert eval("3!=4") == True
@@ -157,7 +157,7 @@ def test_relational_expressions():
     assert eval("4>=5") == False
 
 def test_evaluate_print():
-    print("testing evaluate print")
+    print("testing evaluate print...")
     assert eval("print 3") == None    
     assert printed_string == "3"
     assert eval("print 3.14") == None    
@@ -210,7 +210,7 @@ def test_evaluate_statement_blocks():
 
 
 def test_evaluate_if_statement():
-    print("testing evaluate if_statement")
+    print("testing evaluate if_statement...")
     environment = {}
     eval("if (1==1) {x=3}", environment)
     assert environment["x"] == 3
