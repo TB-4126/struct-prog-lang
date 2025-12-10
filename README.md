@@ -41,7 +41,9 @@ topic-04 contains:
 - trivial
 - example.t
 
-extras contains various testcases for program language functionality:
+extras contains:
 - test-suite.t
+-# Various testcases for checking language functionality
 
 ## Execution Instructions
+In its current form the only way to run the interpreter for Trivial is by typing "./trivial <files>" into the command prompt. Which calls the Python interpreter on the runner.
