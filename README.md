@@ -92,4 +92,4 @@ extras contains:
 Various testcases for checking language functionality
 
 ## Execution Instructions
-In its current form the only way to run the interpreter for Trivial is by typing "./trivial <files>" into the command prompt. Which calls the Python interpreter on the runner.
+In its current form the only way to run the interpreter for Trivial is by typing "./trivial file1 ..." into the command prompt. Which calls the Python interpreter on the runner.
