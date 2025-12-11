@@ -5,7 +5,7 @@ The reason I chose C as the programming language is because I like low-level pro
 Link to the documentation I consulted: [https://docs.python.org/3/c-api/index.html]
 
 ## Files:
-### src:
+### Source:
 - tokenizer.py
 - parser.py
 - evaluator.py
