@@ -393,7 +393,7 @@ count = 0;
 
 print "Chapter 9 tests completed.";
 
-// Chapter 10: Functions - Test Suite
+Chapter 10: Functions - Test Suite
 
 print("Chapter 10: Functions");
 

@@ -1,15 +1,9 @@
 #!/usr/bin/env python
 
-import sys
-
 from tokenizer import tokenize
-
 from parser import parse
-
 from evaluator import evaluate
-
-# watch=<identifier>
-#needs to recognize this in the command line
+import sys
 
 def main():
     environment = {}
@@ -22,7 +16,15 @@ def main():
         try:
             tokens = tokenize(source_code)
             ast = parse(tokens)
-            final_value, exit_status = evaluate(ast, environment)
+
+            watch_identifiers = [] # list of identifiers to watch for
+            if len(sys.argv) > 2: # checks if CLI parameters are present at all
+                for parameter_CLI in sys.argv:
+                    if parameter_CLI.startswith("watch="): # checks if the parameter watch= is present
+                        watch_identifiers.append(parameter_CLI[6:]) # slices off the watch= to get the identifier name
+            print("Watching Identifiers:",watch_identifiers) # outputs the identifiers being watched
+
+            final_value, exit_status = evaluate(ast, environment, watch_identifiers)
             if exit_status == "exit":
                 # print(f"Exiting with code: {final_value}") # Optional debug print
                 sys.exit(final_value if isinstance(final_value, int) else 0)
